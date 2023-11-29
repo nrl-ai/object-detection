@@ -1,0 +1,23 @@
+[NanoDet][11-29 12:53:59]INFO: Setting up data...
+[NanoDet][11-29 12:53:59]INFO: Creating model...
+[NanoDet][11-29 12:54:03]INFO: Starting testing...
+[NanoDet][11-29 12:54:03]INFO: Loaded average state from checkpoint.
+[NanoDet][11-29 12:54:10]INFO: 
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.485
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.681
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.443
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.200
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.509
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.956
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.361
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.514
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.515
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.240
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.659
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.967
+
+[NanoDet][11-29 12:54:10]INFO: 
+| class    | AP50   | mAP   | class      | AP50   | mAP   |
+|:---------|:-------|:------|:-----------|:-------|:------|
+| circuits | nan    | nan   | breadboard | 97.8   | 94.9  |
+| resistor | 84.4   | 35.5  | wire       | 22.2   | 15.1  |
