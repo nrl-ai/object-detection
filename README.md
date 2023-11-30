@@ -38,3 +38,8 @@ python tools/train.py --config config/nanodet-plus-m_416.yml
 ```
 python tools/export_onnx.py --cfg_path config/nanodet-plus-m_416.yml --model workspace/nanodet-plus-m_416/model_best/nanodet_model_best.pth
 ```
+
+
+## References
+
+- This code is based on [Nanodet](https://github.com/RangiLyu/nanodet).
