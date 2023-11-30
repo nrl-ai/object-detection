@@ -1,5 +1,7 @@
 FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
 
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+
 WORKDIR /workspace
 
 # Configure library

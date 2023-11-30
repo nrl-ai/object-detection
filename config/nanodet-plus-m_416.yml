@@ -69,8 +69,8 @@ model:
 data:
   train:
     name: CocoDataset
-    img_path: datasets/Resistor_data/train
-    ann_path: datasets/Resistor_data/train/_annotations.coco.json
+    img_path: datasets/resistor_data/train
+    ann_path: datasets/resistor_data/train/_annotations.coco.json
     input_size: [416,416] #[w,h]
     keep_ratio: False
     pipeline:
@@ -87,8 +87,8 @@ data:
       normalize: [[103.53, 116.28, 123.675], [57.375, 57.12, 58.395]]
   val:
     name: CocoDataset
-    img_path: datasets/Resistor_data/valid
-    ann_path: datasets/Resistor_data/valid/_annotations.coco.json
+    img_path: datasets/resistor_data/val
+    ann_path: datasets/resistor_data/val/_annotations.coco.json
     input_size: [416,416] #[w,h]
     keep_ratio: False
     pipeline:

@@ -5,8 +5,8 @@ class_names:
 - wire
 data:
   train:
-    ann_path: datasets/Resistor_data/train/_annotations.coco.json
-    img_path: datasets/Resistor_data/train
+    ann_path: datasets/resistor_data/train/_annotations.coco.json
+    img_path: datasets/resistor_data/train
     input_size:
     - 320
     - 320
@@ -41,8 +41,8 @@ data:
         - 1.2
       translate: 0.2
   val:
-    ann_path: datasets/Resistor_data/valid/_annotations.coco.json
-    img_path: datasets/Resistor_data/valid
+    ann_path: datasets/resistor_data/val/_annotations.coco.json
+    img_path: datasets/resistor_data/val
     input_size:
     - 320
     - 320
