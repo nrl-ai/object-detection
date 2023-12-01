@@ -15,7 +15,7 @@
 import argparse
 import os
 import warnings
-
+import json
 import pytorch_lightning as pl
 import torch
 from pytorch_lightning.callbacks import TQDMProgressBar
@@ -37,7 +37,17 @@ from nanodet.util import (
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("config", help="train config file path")
+    parser.add_argument("--epochs", type=int, default=10, help="The number of epochs")
+    parser.add_argument(
+        "--learning_rate", type=float, default=0.001, help="The learning rate"
+    )
+    parser.add_argument("--batch_size", type=int, default=16, help="Batch size")
+    parser.add_argument(
+        "--dataset", type=str, default="dataset/resistor_data", help="Path dataset"
+    )
+    parser.add_argument(
+        "--model_path", type=str, default="out_snapshot/nanodet", help="Path model"
+    )
     parser.add_argument(
         "--local_rank", default=-1, type=int, help="node rank for distributed training"
     )
@@ -47,7 +57,26 @@ def parse_args():
 
 
 def main(args):
-    load_config(cfg, args.config)
+    load_config(cfg, "config/nanodet-plus-m_416.yml")
+    cfg.defrost()
+    cfg.save_dir = args.model_path
+    os.chmod(cfg.save_dir, 0o777)
+    
+    
+    cfg.data.train.img_path= os.path.join(args.dataset, "train")
+    cfg.data.train.ann_path= os.path.join(args.dataset, "train", "_annotations.coco.json")
+    cfg.data.val.img_path = os.path.join(args.dataset, "val")
+    cfg.data.val.ann_path = os.path.join(args.dataset, "val", "_annotations.coco.json")
+    
+    data_json = json.load(open(os.path.join(args.dataset, "val", "_annotations.coco.json")))
+    data_name = [data["name"] for data in data_json["categories"]]
+    cfg.class_names = data_name
+    cfg.model.arch.head.num_classes = len(data_name)
+    cfg.model.arch.aux_head.num_classes = len(data_name)
+    cfg.schedule.optimizer.lr = args.learning_rate
+    cfg.schedule.total_epochs = args.epochs
+    cfg.device.batchsize_per_gp = args.batch_size
+
     if cfg.model.arch.head.num_classes != len(cfg.class_names):
         raise ValueError(
             "cfg.model.arch.head.num_classes must equal len(cfg.class_names), "
@@ -148,6 +177,7 @@ def main(args):
     )
 
     trainer.fit(task, train_dataloader, val_dataloader, ckpt_path=model_resume_path)
+    os.chmod(cfg.save_dir, 0o777)
 
 
 if __name__ == "__main__":

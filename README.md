@@ -24,13 +24,13 @@ docker build -t nanodet_train .
 ### Start new docker container
 
 ```
-docker run -it -d --restart always --shm-size=32GB --gpus=all -v `pwd`/workspace:/workspace/out_snapshot -v `pwd`/dataset:/workspace/dataset --name nanodet_train nanodet_train:latest
+docker run -it -d --restart always --shm-size=32GB --gpus=all -v `pwd`/out_snapshot:/workspace/out_snapshot -v `pwd`/dataset:/workspace/dataset --name nanodet_train nanodet_train:latest
 ```
 
 ### Run training ([resnet18, resnet34, resnet50, mobilenet_v2, mobilenet_v3_small])
 
 ```
-python tools/train.py --config config/nanodet-plus-m_416.yml
+python tools/train.py --epochs 10 --learning_rate 0.001 --dataset dataset/resistor_data --model_path out_snapshot/nanodet
 ```
 
 ### Run export model
