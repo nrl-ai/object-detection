@@ -27,7 +27,7 @@ docker build -t nanodet_train .
 docker run -it -d --restart always --shm-size=32GB --gpus=all -v `pwd`/workspace:/workspace/out_snapshot -v `pwd`/dataset:/workspace/dataset --name nanodet_train nanodet_train:latest
 ```
 
-### Run training ([resnet18, resnet34, resnet50, mobilenet_v2, mobilenet_v3_small])
+### Run training 
 
 ```
 python tools/train.py --config config/nanodet-plus-m_416.yml
